@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">TeraSystemHRIS</string>
+    <string name="tera_logo">TeraSystem Logo</string>
+    <string name="what_is_your_userID">User ID</string>
+    <string name="what_is_your_password">Password</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="signup">Sign Up</string>
+    <string name="network_error">Network Error</string>
+    <string name="action_favorite">LOGOUT</string>
+    <string name="toolbar_update_profile_title">Update Profile</string>
+    <string name="profile_name_text">JERICHO ISAAC R. MAGALLANES</string>
+    <string name="id_label_text">ID Number</string>
+    <string name="profile_id_text">2019015</string>
+    <string name="email_label_text">Email Address</string>
+    <string name="profile_email_text">jericho.magallanes@terasystem.com</string>
+    <string name="mobile_label_text">Mobile Number</string>
+    <string name="profile_mobile_text">09176554356</string>
+    <string name="update_button_text">Update</string>
+    <!--<string name="update_profile_id_text">2019015</string>-->
+    <string name="update_firstname_label_text">First Name</string>
+    <!--<string name="update_profile_firstname_text">Jericho Isaac</string>-->
+    <string name="update_middlename_label_text">Middle Name</string>
+    <!--<string name="update_profile_middlename_text">Requintina</string>-->
+    <string name="update_lastname_label_text">Last Name</string>
+    <!--<string name="update_profile_email_text">""</string>-->
+    <!--<string name="update_profile_mobile_text">""</string>-->
+    <!--<string name="update_profile_landline_text">""</string>-->
+    <string name="update_landline_label_text">Landline</string>
+    <string name="success_title">Success</string>
+    <string name="success_message_text">You have successfully update your profile!</string>
+    <string name="ok_button_text">OK</string>
+    <string name="title_activity_logout">Logout</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="what_is_your_middlename">Optional</string>
+    <string name="what_is_your_landline">Optional</string>
+    <string name="connection_timeout_message">Connection timed out</string>
+    <string name="server_error">Could not connect to the server</string>
+    <string name="no_internet_message">No Internet Connection</string>
+    <string name="close_icon">X</string>
+
+    <string name="logs_icon">Time Logs</string>
+    <string name="leaves_icon">Leaves</string>
+    <string name="clients_icon">Clients</string>
+    <string name="me_icon">Me</string>
+
+    <string name="toolbar_logs_title">Time Logs</string>
+    <string name="toolbar_leaves_title">Leaves</string>
+    <string name="toolbar_clients_title">Clients</string>
+    <string name="toolbar_profile_title">Profile</string>
+</resources>

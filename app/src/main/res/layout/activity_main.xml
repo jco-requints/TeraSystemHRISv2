@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/layout">
+
+    <data>
+
+        <variable
+                name="myCredentials"
+                type="com.example.terasystemhris.MyCredentials"/>
+    </data>
+
+    <ScrollView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:background="@drawable/homebg">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".MainActivity">
+
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/terasystemlogo"
+                    android:id="@+id/tera_logo"
+                    android:contentDescription="@string/tera_logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="24dp"/>
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    android:ems="10"
+                    android:id="@+id/userId_edit"
+                    style="@style/NameStyle"
+                    android:hint="@string/what_is_your_userID"
+                    android:autofillHints=""
+                    android:fontFamily="@font/roboto"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tera_logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/password_edit"
+                    android:hint="@string/what_is_your_password"
+                    android:autofillHints=""
+                    style="@style/NameStyle"
+                    app:layout_constraintTop_toBottomOf="@+id/userId_edit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintHorizontal_bias="0.0"/>
+
+
+            <FrameLayout
+                    android:id="@+id/login_button_holder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/password_edit"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintHorizontal_bias="0.0">
+
+                <Button
+                        android:text="@string/login"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/roboto"
+                        android:id="@+id/login_button"
+                        android:background="#1D8ECE"/>
+            </FrameLayout>
+
+            <FrameLayout
+                    android:id="@+id/signup_button_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/login_button_holder"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintVertical_bias="1.0">
+
+                <Button
+                        android:text="@string/signup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:id="@+id/signup_button"
+                        android:background="@null"
+                        android:textColor="#048dc9"
+                />
+
+            </FrameLayout>
+
+            <FrameLayout
+                    android:id="@+id/progressBarHolder"
+                    android:animateLayoutChanges="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:alpha="0.4"
+                    android:layout_width="match_parent"
+                    android:fillViewport="false"
+                    android:visibility="gone"
+                    android:background="#000000"
+                    android:clickable="true"
+                    android:layout_height="0dp">
+
+                <ProgressBar
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/progressBar"
+                        android:indeterminate="true"
+                        android:layout_gravity="center"
+
+                />
+            </FrameLayout>
+
+            <FrameLayout
+                    android:id="@+id/popupHolder"
+                    android:animateLayoutChanges="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:fillViewport="false"
+                    android:clickable="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/my_border">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_height="250dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/ic_launcher_background"
+                        android:layout_marginEnd="8dp">
+
+                    <TextView
+                            android:id="@+id/txtclose"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:textColor="#03A9F4"
+                            android:text="@string/close_icon"
+
+                            android:textStyle="bold"
+                            android:layout_gravity="end"
+                            android:gravity="center"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginBottom="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintVertical_bias="0.0"
+                            android:textSize="24sp"/>
+
+
+                    <TextView
+                            android:id="@+id/network_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Connection Timed Out"
+                            android:textSize="18sp"
+                            android:textColor="#000000"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
