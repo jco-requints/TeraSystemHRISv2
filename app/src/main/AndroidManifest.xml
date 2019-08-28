@@ -3,18 +3,33 @@
           package="com.example.terasystemhris">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:allowBackup="true"
+            android:hardwareAccelerated="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
+            android:largeHeap="true"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
+            android:usesCleartextTraffic="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity
+                android:name=".WebView"
+                android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
+        <activity
+                android:name=".FragmentActivity"
+                android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
+        <activity
+                android:name=".MainActivity"
+                android:configChanges="orientation|screenSize|keyboardHidden"
+                android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>

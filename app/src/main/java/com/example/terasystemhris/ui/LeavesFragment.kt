@@ -8,17 +8,17 @@ import android.view.ViewGroup
 import com.example.terasystemhris.R
 
 
-class HomeFragment : Fragment() {
+class LeavesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        activity?.title = getString(R.string.title_home)
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        activity?.title = getString(R.string.leaves_title)
+        val view = inflater.inflate(R.layout.fragment_leaves, container, false)
         return view
     }
 
     companion object {
-        val TAG: String = HomeFragment::class.java.simpleName
-        fun newInstance() = HomeFragment()
+        val TAG: String = LeavesFragment::class.java.simpleName
+        fun newInstance() = LeavesFragment()
     }
 
 }

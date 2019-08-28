@@ -11,7 +11,7 @@ import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_BACK
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activty_main.*
 import org.json.JSONObject
 import java.net.URL
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), NetworkRequestInterface {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activty_main)
         val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingLogin.htm").toString()
 
         login_button.setOnClickListener {
@@ -80,9 +80,9 @@ class MainActivity : AppCompatActivity(), NetworkRequestInterface {
             if(status == "0")
             {
                 jsonObject = jsonObject.getJSONObject("user")
-                apply {
-                    val intent = Intent(this@MainActivity,
-                        Logs::class.java).apply {
+
+                val intent = Intent(this@MainActivity,
+                        FragmentActivity::class.java).apply {
                         val extras = Bundle()
                         extras.putString("EXTRA_USERNAME", jsonObject?.get("userID").toString())
                         extras.putString("EXTRA_EMPID", jsonObject?.get("idNumber").toString())
@@ -93,9 +93,9 @@ class MainActivity : AppCompatActivity(), NetworkRequestInterface {
                         extras.putString("EXTRA_MOBILE", jsonObject?.get("mobileNumber").toString())
                         extras.putString("EXTRA_LANDLINE", jsonObject?.get("landline").toString())
                         this.putExtras(extras)
-                    }
-                    startActivity(intent)
                 }
+                startActivity(intent)
+
             }
             else
             {

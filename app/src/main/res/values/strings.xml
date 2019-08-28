@@ -56,8 +56,8 @@
     <string name="clients_icon">Clients</string>
     <string name="me_icon">Me</string>
 
-    <string name="toolbar_logs_title">Time Logs</string>
-    <string name="toolbar_leaves_title">Leaves</string>
-    <string name="toolbar_clients_title">Clients</string>
-    <string name="toolbar_profile_title">Profile</string>
+    <string name="logs_title">Time Logs</string>
+    <string name="leaves_title">Leaves</string>
+    <string name="clients_title">Clients</string>
+    <string name="profile_title">Profile</string>
 </resources>

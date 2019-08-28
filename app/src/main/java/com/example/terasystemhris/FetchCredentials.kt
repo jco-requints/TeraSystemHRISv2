@@ -1,19 +1,11 @@
 package com.example.terasystemhris
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
-import android.net.Uri
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.core.net.toUri
-import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONObject
 import java.io.BufferedReader
-import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
