@@ -17,11 +17,12 @@ import java.net.URL
 
 class MainActivity : AppCompatActivity(), NetworkRequestInterface {
 
+    lateinit var myDetails: AccountDetails
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activty_main)
         val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingLogin.htm").toString()
-
         login_button.setOnClickListener {
             if (userId_edit.text.trim().toString() == "")
             {
@@ -33,9 +34,9 @@ class MainActivity : AppCompatActivity(), NetworkRequestInterface {
             }
             if(userId_edit.text.trim().toString() != "" && password_edit.text.trim().toString() != "")
             {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(it.windowToken, 0)
                 if (isConnected(this)) {
-                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(it.windowToken, 0)
                     userId_edit.clearFocus()
                     password_edit.clearFocus()
                     FetchCredentials(this).execute(mURL, userId_edit.text.toString(), password_edit.text.toString())
@@ -80,19 +81,28 @@ class MainActivity : AppCompatActivity(), NetworkRequestInterface {
             if(status == "0")
             {
                 jsonObject = jsonObject.getJSONObject("user")
-
+                myDetails = AccountDetails("","","","","","","","")
+                myDetails.username = jsonObject?.get("userID").toString()
+                myDetails.empID = jsonObject?.get("idNumber").toString()
+                myDetails.firstName = jsonObject?.get("firstName").toString()
+                myDetails.middleName = jsonObject?.get("middleName").toString()
+                myDetails.lastName = jsonObject?.get("lastName").toString()
+                myDetails.emailAddress = jsonObject?.get("emailAddress").toString()
+                myDetails.mobileNumber = jsonObject?.get("mobileNumber").toString()
+                myDetails.landlineNumber = jsonObject?.get("landline").toString()
                 val intent = Intent(this@MainActivity,
-                        FragmentActivity::class.java).apply {
-                        val extras = Bundle()
-                        extras.putString("EXTRA_USERNAME", jsonObject?.get("userID").toString())
-                        extras.putString("EXTRA_EMPID", jsonObject?.get("idNumber").toString())
-                        extras.putString("EXTRA_FIRSTNAME", jsonObject?.get("firstName").toString())
-                        extras.putString("EXTRA_MIDDLENAME", jsonObject?.get("middleName").toString())
-                        extras.putString("EXTRA_LASTNAME", jsonObject?.get("lastName").toString())
-                        extras.putString("EXTRA_EMAIL", jsonObject?.get("emailAddress").toString())
-                        extras.putString("EXTRA_MOBILE", jsonObject?.get("mobileNumber").toString())
-                        extras.putString("EXTRA_LANDLINE", jsonObject?.get("landline").toString())
-                        this.putExtras(extras)
+                    FragmentActivity::class.java).apply {
+                    this.putExtra("keyAccountDetails", myDetails)
+//                        val extras = Bundle()
+//                        extras.putString("EXTRA_USERNAME", jsonObject?.get("userID").toString())
+//                        extras.putString("EXTRA_EMPID", jsonObject?.get("idNumber").toString())
+//                        extras.putString("EXTRA_FIRSTNAME", jsonObject?.get("firstName").toString())
+//                        extras.putString("EXTRA_MIDDLENAME", jsonObject?.get("middleName").toString())
+//                        extras.putString("EXTRA_LASTNAME", jsonObject?.get("lastName").toString())
+//                        extras.putString("EXTRA_EMAIL", jsonObject?.get("emailAddress").toString())
+//                        extras.putString("EXTRA_MOBILE", jsonObject?.get("mobileNumber").toString())
+//                        extras.putString("EXTRA_LANDLINE", jsonObject?.get("landline").toString())
+//                        this.putExtras(extras)
                 }
                 startActivity(intent)
 
