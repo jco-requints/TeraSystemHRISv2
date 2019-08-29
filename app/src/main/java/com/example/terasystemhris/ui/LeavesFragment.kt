@@ -14,12 +14,15 @@ class LeavesFragment : Fragment() {
         activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_leaves, container, false)
         activity?.toolbar_title?.text = getString(R.string.leaves_title)
+        activity?.toolbar_button?.text = null
         return view
     }
 
     companion object {
         val TAG: String = LeavesFragment::class.java.simpleName
-        fun newInstance() = LeavesFragment()
+        fun newInstance(bundle: Bundle) = LeavesFragment().apply {
+            this.arguments = bundle
+        }
     }
 
 }

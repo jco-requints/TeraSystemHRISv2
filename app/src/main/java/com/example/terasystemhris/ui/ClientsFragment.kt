@@ -1,5 +1,6 @@
 package com.example.bottomnavigation.ui
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,12 +15,15 @@ class ClientsFragment : Fragment() {
         activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_clients, container, false)
         activity?.toolbar_title?.text = getString(R.string.clients_title)
+        activity?.toolbar_button?.text = null
         return view
     }
 
     companion object {
         val TAG: String = ClientsFragment::class.java.simpleName
-        fun newInstance() = ClientsFragment()
+        fun newInstance(bundle: Bundle) = ClientsFragment().apply {
+            this.arguments = bundle
+        }
     }
 
 }

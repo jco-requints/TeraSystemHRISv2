@@ -13,6 +13,9 @@ import com.example.bottomnavigation.helper.BottomNavigationPosition
 import com.example.bottomnavigation.helper.createFragment
 import com.example.bottomnavigation.helper.findNavigationPositionById
 import com.example.bottomnavigation.helper.getTag
+import com.example.bottomnavigation.ui.ClientsFragment
+import com.example.bottomnavigation.ui.LeavesFragment
+import com.example.bottomnavigation.ui.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FragmentActivity : AppCompatActivity() {
@@ -27,23 +30,10 @@ class FragmentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         restoreSaveInstanceState(savedInstanceState)
         setContentView(R.layout.fragment_main)
-//        val data = intent.extras
-//        val accountDetails = data?.getParcelable<AccountDetails>("keyAccountDetails")!!
-//        val profile_name = if(accountDetails.middleName != "")
-//        {
-//            ("${accountDetails.firstName} ${accountDetails.middleName} ${accountDetails.lastName}").toUpperCase()
-//        }
-//        else
-//        {
-//            ("${accountDetails.firstName} ${accountDetails.lastName}").toUpperCase()
-//        }
-//        name_text?.text = profile_name
-//        val firstNameInitial = accountDetails.firstName[0].toString()
-//        val lastNameInitial = accountDetails.lastName[0].toString()
-//        profile_id?.text = accountDetails.empID
-//        profile_email?.text = maskEmail(accountDetails.emailAddress)
-//        profile_number?.text = maskMobileNumber(accountDetails.mobileNumber)
-//        initials?.text = "$firstNameInitial$lastNameInitial"
+        val data = intent.extras
+        val accountDetails = data?.getParcelable<AccountDetails>("keyAccountDetails")!!
+        val bundle = Bundle()
+        bundle.putParcelable("keyAccountDetails", accountDetails)
 
         findViewById<Toolbar>(R.id.toolbar).apply {
             setSupportActionBar(this)
@@ -55,48 +45,11 @@ class FragmentActivity : AppCompatActivity() {
             active(navPosition.position) // Extension function
             setOnNavigationItemSelectedListener { item ->
                 navPosition = findNavigationPositionById(item.itemId)
-                switchFragment(navPosition)
+                switchFragment(navPosition, bundle)
             }
         }
 
-        initFragment(savedInstanceState)
-    }
-
-    private fun maskEmail(email: String?): String{
-        val email_id: String? = email?.substringBeforeLast("@")
-        var masked_email: String = ""
-        val email_initials = email?.substring(0..3)
-        val hide_email = email?.replaceBefore('@', "*****")
-        if(email_id!!.count() <= 3)
-        {
-            masked_email = "$email_id$hide_email"
-        }
-        else if(email_id!!.count() > 3)
-        {
-            masked_email = "$email_initials$hide_email"
-        }
-        return  masked_email
-    }
-
-    private fun maskMobileNumber(mobile: String?): String{
-        val country_code: String
-        val mobile_initials: String
-        val hide_mobile: String
-        var masked_mobile: String = ""
-        if(mobile?.count() == 13)
-        {
-            country_code = mobile.substring(0..2)
-            mobile_initials = mobile.substring(3..5)
-            hide_mobile = mobile.substring(9..12)
-            masked_mobile = "$country_code $mobile_initials *** $hide_mobile"
-        }
-        else if(mobile?.count() == 11)
-        {
-            mobile_initials = mobile.substring(0..3)
-            hide_mobile = mobile.substring(7..10)
-            masked_mobile = "$mobile_initials *** $hide_mobile"
-        }
-        return  masked_mobile
+        initFragment(savedInstanceState, bundle)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -110,12 +63,12 @@ class FragmentActivity : AppCompatActivity() {
         }
     }
 
-    private fun initFragment(savedInstanceState: Bundle?) {
-        savedInstanceState ?: switchFragment(BottomNavigationPosition.LOGS)
+    private fun initFragment(savedInstanceState: Bundle?, bundle: Bundle) {
+        savedInstanceState ?: switchFragment(BottomNavigationPosition.LOGS, bundle)
     }
 
-    private fun switchFragment(navPosition: BottomNavigationPosition): Boolean {
-        return findFragment(navPosition).let {
+    private fun switchFragment(navPosition: BottomNavigationPosition, bundle: Bundle): Boolean {
+        return findFragment(navPosition, bundle).let {
             if (it.isAdded) return false
             supportFragmentManager.detach() // Extension function
             supportFragmentManager.attach(it, navPosition.getTag()) // Extension function
@@ -123,8 +76,8 @@ class FragmentActivity : AppCompatActivity() {
         }
     }
 
-    private fun findFragment(position: BottomNavigationPosition): Fragment {
-        return supportFragmentManager.findFragmentByTag(position.getTag()) ?: position.createFragment()
+    private fun findFragment(position: BottomNavigationPosition, bundle: Bundle): Fragment {
+        return supportFragmentManager.findFragmentByTag(position.getTag()) ?: position.createFragment(bundle)
     }
 
     override

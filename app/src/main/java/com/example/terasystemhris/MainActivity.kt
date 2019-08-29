@@ -93,16 +93,6 @@ class MainActivity : AppCompatActivity(), NetworkRequestInterface {
                 val intent = Intent(this@MainActivity,
                     FragmentActivity::class.java).apply {
                     this.putExtra("keyAccountDetails", myDetails)
-//                        val extras = Bundle()
-//                        extras.putString("EXTRA_USERNAME", jsonObject?.get("userID").toString())
-//                        extras.putString("EXTRA_EMPID", jsonObject?.get("idNumber").toString())
-//                        extras.putString("EXTRA_FIRSTNAME", jsonObject?.get("firstName").toString())
-//                        extras.putString("EXTRA_MIDDLENAME", jsonObject?.get("middleName").toString())
-//                        extras.putString("EXTRA_LASTNAME", jsonObject?.get("lastName").toString())
-//                        extras.putString("EXTRA_EMAIL", jsonObject?.get("emailAddress").toString())
-//                        extras.putString("EXTRA_MOBILE", jsonObject?.get("mobileNumber").toString())
-//                        extras.putString("EXTRA_LANDLINE", jsonObject?.get("landline").toString())
-//                        this.putExtras(extras)
                 }
                 startActivity(intent)
 

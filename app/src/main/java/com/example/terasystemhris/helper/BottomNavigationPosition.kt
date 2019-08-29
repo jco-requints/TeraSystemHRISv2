@@ -1,5 +1,6 @@
 package com.example.bottomnavigation.helper
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.bottomnavigation.ui.ClientsFragment
 import com.example.bottomnavigation.ui.LeavesFragment
@@ -22,11 +23,11 @@ fun findNavigationPositionById(id: Int): BottomNavigationPosition = when (id) {
     else -> BottomNavigationPosition.LOGS
 }
 
-fun BottomNavigationPosition.createFragment(): Fragment = when (this) {
-    BottomNavigationPosition.LOGS -> LogsFragment.newInstance()
-    BottomNavigationPosition.LEAVES -> LeavesFragment.newInstance()
-    BottomNavigationPosition.CLIENTS -> ClientsFragment.newInstance()
-    BottomNavigationPosition.PROFILE -> ProfileFragment.newInstance()
+fun BottomNavigationPosition.createFragment(bundle: Bundle): Fragment = when (this) {
+    BottomNavigationPosition.LOGS -> LogsFragment.newInstance(bundle)
+    BottomNavigationPosition.LEAVES -> LeavesFragment.newInstance(bundle)
+    BottomNavigationPosition.CLIENTS -> ClientsFragment.newInstance(bundle)
+    BottomNavigationPosition.PROFILE -> ProfileFragment.newInstance(bundle)
 }
 
 fun BottomNavigationPosition.getTag(): String = when (this) {

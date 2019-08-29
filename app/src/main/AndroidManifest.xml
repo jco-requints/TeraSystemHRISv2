@@ -13,9 +13,12 @@
             android:largeHeap="true"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:usesCleartextTraffic="true"
-            android:theme="@style/AppTheme">
-
+            android:theme="@style/AppTheme"
+            android:usesCleartextTraffic="true">
+        <activity android:name=".Success">
+        </activity>
+        <activity android:name=".Update">
+        </activity>
         <activity
                 android:name=".WebView"
                 android:configChanges="orientation|screenSize|keyboardHidden">
@@ -30,6 +33,7 @@
                 android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
