@@ -49,6 +49,7 @@
     <string name="connection_timeout_message">Connection timed out</string>
     <string name="server_error">Could not connect to the server</string>
     <string name="no_internet_message">No Internet Connection</string>
+    <string name="logs_error_message">Failed to retrieve logs</string>
     <string name="close_icon">X</string>
 
     <string name="logs_icon">Time Logs</string>
@@ -60,4 +61,6 @@
     <string name="leaves_title">Leaves</string>
     <string name="clients_title">Clients</string>
     <string name="profile_title">Profile</string>
+    <string name="log_date">Log Date</string>
+
 </resources>

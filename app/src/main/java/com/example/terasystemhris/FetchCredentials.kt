@@ -120,6 +120,46 @@ class FetchCredentials(private var networkRequestInterface: NetworkRequestInterf
         } catch (ex: Exception) {
             Log.d("", "Error in doInBackground ")
         }
+
+        //try catch for Get Time Logs
+        try {
+            val reqParam = URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(userID, "UTF-8")
+
+            with(mURL.openConnection() as HttpURLConnection) {
+                requestMethod = "POST"
+                var inputLine: String?
+                handleTimeout { timedOut ->
+                    if (timedOut) {
+                        isTimedOut = true
+                        disconnect()
+                        result = "Connection Timeout"
+                    }
+                }
+
+                if(!isTimedOut)
+                {
+                    val wr = OutputStreamWriter(outputStream)
+                    wr.write(reqParam)
+                    wr.flush()
+
+                    BufferedReader(InputStreamReader(inputStream)).use {
+                        val response = StringBuffer()
+
+                        inputLine = it.readLine()
+                        while (inputLine != null) {
+                            response.append(inputLine)
+                            inputLine = it.readLine()
+
+                        }
+                        result = response.toString()
+                        it.close()
+                    }
+                }
+
+            }
+        } catch (ex: Exception) {
+            Log.d("", "Error in doInBackground ")
+        }
         return result
     }
 
