@@ -62,5 +62,8 @@
     <string name="clients_title">Clients</string>
     <string name="profile_title">Profile</string>
     <string name="log_date">Log Date</string>
+    <string name="time_in_office">Time in Office</string>
+    <string name="to_label">To</string>
+    <string name="break_in_office">Break Time</string>
 
 </resources>

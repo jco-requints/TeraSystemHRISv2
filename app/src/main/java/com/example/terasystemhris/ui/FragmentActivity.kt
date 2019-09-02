@@ -76,6 +76,13 @@ class FragmentActivity : AppCompatActivity() {
         }
     }
 
+    fun switchContent(id: Int, fragment: Fragment) {
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(id, fragment, fragment.toString())
+        ft.addToBackStack(null)
+        ft.commit()
+    }
+
     private fun findFragment(position: BottomNavigationPosition, bundle: Bundle): Fragment {
         return supportFragmentManager.findFragmentByTag(position.getTag()) ?: position.createFragment(bundle)
     }
