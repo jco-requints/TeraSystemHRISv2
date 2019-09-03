@@ -16,6 +16,7 @@ class ClientsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_clients, container, false)
         activity?.toolbar_title?.text = getString(R.string.clients_title)
         activity?.toolbar_button?.text = null
+        activity?.toolbar_button?.isClickable = false
         return view
     }
 

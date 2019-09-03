@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.example.bottomnavigation.extension.active
 import com.example.bottomnavigation.extension.attach
 import com.example.bottomnavigation.extension.detach
@@ -77,7 +78,7 @@ class FragmentActivity : AppCompatActivity() {
     }
 
     fun switchContent(id: Int, fragment: Fragment) {
-        val ft = supportFragmentManager.beginTransaction()
+        val ft = supportFragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         ft.replace(id, fragment, fragment.toString())
         ft.addToBackStack(null)
         ft.commit()

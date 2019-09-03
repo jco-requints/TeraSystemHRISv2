@@ -61,9 +61,29 @@
     <string name="leaves_title">Leaves</string>
     <string name="clients_title">Clients</string>
     <string name="profile_title">Profile</string>
+    <string name="date_title">DATE</string>
+    <string name="time_in_title">IN</string>
+    <string name="time_out_title">OUT</string>
+    <string name="addtimelog_title">Add Time Log</string>
+    <string name="done_title">Done</string>
     <string name="log_date">Log Date</string>
     <string name="time_in_office">Time in Office</string>
     <string name="to_label">To</string>
     <string name="break_in_office">Break Time</string>
+    <string name="log_type_title">Type</string>
+    <string name="addtimelogsuccess_title">Success</string>
+    <string name="time_title">Time</string>
+    <string name="time_log_success_message">You have successfully saved the following details:</string>
+    <string name="time_in_text">Time In</string>
+    <string name="break_out_text">Break Out</string>
+    <string name="break_in_text">Break In</string>
+    <string name="time_out_text">Time Out</string>
+
+    <string-array name="log_type">
+        <item>Time In</item>
+        <item>Break Out</item>
+        <item>Break In</item>
+        <item>Time Out</item>
+    </string-array>
 
 </resources>

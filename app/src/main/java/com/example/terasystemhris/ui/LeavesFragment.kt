@@ -15,6 +15,7 @@ class LeavesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_leaves, container, false)
         activity?.toolbar_title?.text = getString(R.string.leaves_title)
         activity?.toolbar_button?.text = null
+        activity?.toolbar_button?.isClickable = false
         return view
     }
 

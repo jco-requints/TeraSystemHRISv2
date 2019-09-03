@@ -32,12 +32,14 @@
 
         <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="end"
+                tools:text="Logout"
+                tools:textSize="24dp"
                 android:layout_alignParentEnd="true"
                 android:background="@null"
                 android:textColor="#FFFFFF"
-                android:scaleType="fitCenter"
+                android:scaleType="centerInside"
                 android:textAlignment="center"
                 android:id="@+id/toolbar_button" android:layout_alignParentRight="true"/>
 

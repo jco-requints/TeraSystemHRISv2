@@ -2,23 +2,21 @@ package com.example.terasystemhris
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_logs.*
+import com.example.bottomnavigation.ui.AddTimeLogFragment
 import kotlinx.android.synthetic.main.fragment_logs.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.json.JSONObject
 import java.net.URL
-import android.R.attr.data
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 
@@ -30,11 +28,6 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
     private var myDetails: AccountDetails = AccountDetails("","","","","","","","")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val roboto = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            resources.getFont(R.font.roboto)
-        } else {
-            TODO("VERSION.SDK_INT < O")
-        }
         val bundle = this.arguments
         if (bundle != null)
         {
@@ -45,25 +38,39 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
         val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingGetTimeLogs.htm").toString()
         activity?.toolbar_title?.text = getString(R.string.logs_title)
         activity?.toolbar_button?.text = "+"
-        activity?.toolbar_button?.typeface = roboto
-        activity?.toolbar_button?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 42F)
+        activity?.toolbar_button?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36F)
         if (isConnected(container!!.context)) {
-            FetchCredentials(this).execute(mURL, myDetails.username)
+            FetchCredentials(this).execute(mURL, myDetails?.username)
         }
         else
         {
             view.popupHolder.visibility = View.VISIBLE
             view.network_status.text = getString(R.string.no_internet_message)
         }
+        activity?.toolbar_button?.setOnClickListener {
+            val mBundle = Bundle()
+            val fragmentManager = activity?.supportFragmentManager
+            val fragment = AddTimeLogFragment()
+            mBundle.putParcelable("keyAccountDetails", myDetails)
+            fragment.arguments = mBundle
+            val fragmentTransaction = fragmentManager?.beginTransaction()?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            fragmentTransaction?.replace(R.id.container, fragment)
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+        }
+        view.txtclose?.setOnClickListener {
+            view.popupHolder.visibility = View.GONE
+        }
+
         return view
     }
 
     override fun beforeNetworkCall() {
-        view?.progressBarHolder?.visibility = View.VISIBLE
+        view?.logsProgressBarHolder?.visibility = View.VISIBLE
     }
 
     override fun afterNetworkCall(result: String?) {
-        view?.progressBarHolder?.visibility = View.GONE
+        view?.logsProgressBarHolder?.visibility = View.GONE
         if(result == "Connection Timeout")
         {
             view?.popupHolder?.visibility = View.VISIBLE
