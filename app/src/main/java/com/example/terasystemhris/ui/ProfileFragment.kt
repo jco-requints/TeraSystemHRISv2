@@ -31,6 +31,8 @@ class ProfileFragment : Fragment() {
         activity?.toolbar_button?.setBackgroundResource(0)
         activity?.toolbar_button?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
         activity?.toolbar_button?.text = getString(R.string.title_activity_logout)
+        activity?.toolbar_button?.visibility = View.VISIBLE
+        activity?.backBtn?.visibility = View.GONE
         val profile_name = if(myDetails.middleName != "" && myDetails.middleName != "null")
         {
             ("${myDetails.firstName} ${myDetails.middleName} ${myDetails.lastName}").toUpperCase()
@@ -40,8 +42,8 @@ class ProfileFragment : Fragment() {
             ("${myDetails.firstName} ${myDetails.lastName}").toUpperCase()
         }
         view.name_text?.text = profile_name
-        val firstNameInitial = myDetails.firstName[0].toString()
-        val lastNameInitial = myDetails.lastName[0].toString()
+        val firstNameInitial = myDetails.firstName[0].toString().toUpperCase()
+        val lastNameInitial = myDetails.lastName[0].toString().toUpperCase()
         view.profile_id?.text = myDetails.empID
         view.profile_email?.text = maskEmail(myDetails.emailAddress)
         view.profile_number?.text = maskMobileNumber(myDetails.mobileNumber)

@@ -88,15 +88,15 @@ class FragmentActivity : AppCompatActivity() {
         return supportFragmentManager.findFragmentByTag(position.getTag()) ?: position.createFragment(bundle)
     }
 
-    override
-    fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        return if (keyCode == KeyEvent.KEYCODE_BACK) {
-            super.onBackPressed()
-            val intent = Intent(this@FragmentActivity, MainActivity::class.java).apply {
-                this.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            startActivity(intent)
-            true
-        } else super.onKeyDown(keyCode, event)
-    }
+//    override
+//    fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+//        return if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            super.onBackPressed()
+//            val intent = Intent(this@FragmentActivity, MainActivity::class.java).apply {
+//                this.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+//            }
+//            startActivity(intent)
+//            true
+//        } else super.onKeyDown(keyCode, event)
+//    }
 }

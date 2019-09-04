@@ -2,6 +2,7 @@ package com.example.bottomnavigation.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.example.terasystemhris.Logs
 import com.example.terasystemhris.R
 import kotlinx.android.synthetic.main.fragment_logdetails.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlin.math.log
 
 class LogDetailsFragment : Fragment() {
@@ -27,10 +29,19 @@ class LogDetailsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_logdetails, container, false)
         activity?.toolbar_title?.text = logDetails.date
         activity?.toolbar_button?.text = null
+        activity?.toolbar_button?.visibility = View.GONE
+        activity?.backBtn?.visibility = View.VISIBLE
+        activity?.backBtn?.text = "<"
+        activity?.backBtn?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36F)
         view.timeIn?.text = logDetails.timeIn
         view.timeOut?.text = logDetails.timeOut
         view.breakIn?.text = logDetails.breakIn
         view.breakOut?.text = logDetails.breakOut
+        activity?.backBtn?.setOnClickListener {
+            val fragmentManager = activity?.supportFragmentManager
+            fragmentManager?.popBackStackImmediate()
+        }
+
         if(logDetails.timeIn.isNullOrEmpty() || logDetails.timeIn == "null")
         {
             view.timeIn?.text = "N/A"

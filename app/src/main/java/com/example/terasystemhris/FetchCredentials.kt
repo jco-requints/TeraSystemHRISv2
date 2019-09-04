@@ -205,7 +205,7 @@ class FetchCredentials(private var networkRequestInterface: NetworkRequestInterf
         return result
     }
 
-    private fun handleTimeout(delay: Long = 60000, timeout: (Boolean) -> Unit) {
+    private fun handleTimeout(delay: Long = 3000, timeout: (Boolean) -> Unit) {
         Handler(Looper.getMainLooper()).postDelayed({
             timeout(true)
         }, delay)

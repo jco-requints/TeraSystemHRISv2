@@ -18,6 +18,15 @@
             android:theme="@style/ToolbarTheme"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+        <Button
+                android:scaleType="fitCenter"
+                android:textAlignment="textStart"
+                android:layout_gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/backBtn" android:textColor="#FFFFFF"
+                android:background="@null"/>
+
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

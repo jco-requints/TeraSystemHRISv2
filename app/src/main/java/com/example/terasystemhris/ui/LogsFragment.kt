@@ -2,11 +2,13 @@ package com.example.terasystemhris
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +19,12 @@ import org.json.JSONObject
 import java.net.URL
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.*
+import java.util.logging.SimpleFormatter
 
 
 class LogsFragment : Fragment(), NetworkRequestInterface {
@@ -39,6 +46,9 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
         activity?.toolbar_title?.text = getString(R.string.logs_title)
         activity?.toolbar_button?.text = "+"
         activity?.toolbar_button?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36F)
+        activity?.toolbar_button?.visibility = View.VISIBLE
+        activity?.backBtn?.visibility = View.GONE
+
         if (isConnected(container!!.context)) {
             FetchCredentials(this).execute(mURL, myDetails?.username)
         }
@@ -94,10 +104,10 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
                     val obj = jsonArray.getJSONObject(i)
                     logsList.userID = obj.getString("userID")
                     logsList.date = convertDateToHumanDate(obj.getString("date"))
-                    logsList.timeIn = obj.getString("timeIn")
-                    logsList.breakOut = obj.getString("breakOut")
-                    logsList.breakIn = obj.getString("breakIn")
-                    logsList.timeOut = obj.getString("timeOut")
+                    logsList.timeIn = convertTimeToStandardTime(obj.getString("timeIn"))
+                    logsList.breakOut = convertTimeToStandardTime(obj.getString("breakOut"))
+                    logsList.breakIn = convertTimeToStandardTime(obj.getString("breakIn"))
+                    logsList.timeOut = convertTimeToStandardTime(obj.getString("timeOut"))
                     logs.add(logsList)
                 }
                 linearLayoutManager = LinearLayoutManager(this.context)
@@ -122,6 +132,18 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
             cal.time = parsedDateFormat
             return humanDateFormat.format(cal.time)
         } catch (e: ParseException) {
+            e.printStackTrace()
+            return ""
+        }
+    }
+
+    private fun convertTimeToStandardTime(logTime: String): String {
+        val militaryTime = SimpleDateFormat("hh:mm")
+        val standardizedTime = SimpleDateFormat("h:mm a")
+        try {
+            val convertedTime = militaryTime.parse(logTime)
+            return standardizedTime.format(convertedTime)
+        } catch (e: Exception) {
             e.printStackTrace()
             return ""
         }
