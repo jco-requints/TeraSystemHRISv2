@@ -80,6 +80,12 @@
     <string name="break_in_text">Break In</string>
     <string name="time_out_text">Time Out</string>
     <string name="cancel_title">Cancel</string>
+    <string name="remaining_leaves_title">Leaves Remaining:</string>
+    <string name="vacation_leave_title">Vacation Leave</string>
+    <string name="sick_leave_title">Sick Leave</string>
+    <string name="used_leaves_title">Leaves Used:</string>
+    <string name="leave_date_title">DATE</string>
+    <string name="no_of_days">NO. OF DAYS</string>
 
     <string-array name="log_type">
         <item>Time In</item>

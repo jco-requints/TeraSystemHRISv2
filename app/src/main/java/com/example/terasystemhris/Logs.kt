@@ -44,19 +44,3 @@ data class Logs(
     }
   }
 }
-
-//private fun convertDateToHumanDate(): String {
-//
-//  val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-//  val humanDateFormat = SimpleDateFormat("dd MMMM yyyy")
-//  try {
-//    val parsedDateFormat = dateFormat.parse(logDate)
-//    val cal = Calendar.getInstance()
-//    cal.time = parsedDateFormat
-//    return humanDateFormat.format(cal.time)
-//  } catch (e: ParseException) {
-//    e.printStackTrace()
-//    return ""
-//  }
-//
-//}
