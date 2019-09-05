@@ -121,7 +121,7 @@ class FetchCredentials(private var networkRequestInterface: NetworkRequestInterf
             Log.d("", "Error in doInBackground ")
         }
 
-        //try catch for Get Time Logs
+        //try catch for Get Time Logs and Get Leaves
         try {
             val reqParam = URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(userID, "UTF-8")
 

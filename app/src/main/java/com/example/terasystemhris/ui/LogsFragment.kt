@@ -57,6 +57,8 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
             view.popupHolder.visibility = View.VISIBLE
             view.network_status.text = getString(R.string.no_internet_message)
         }
+
+        //Logic for + button
         activity?.toolbar_button?.setOnClickListener {
             val mBundle = Bundle()
             val fragmentManager = activity?.supportFragmentManager
@@ -68,6 +70,7 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
             fragmentTransaction?.addToBackStack(null)
             fragmentTransaction?.commit()
         }
+
         view.txtclose?.setOnClickListener {
             view.popupHolder.visibility = View.GONE
         }

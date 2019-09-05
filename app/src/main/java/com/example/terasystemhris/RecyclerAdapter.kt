@@ -1,11 +1,8 @@
 package com.example.terasystemhris
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bottomnavigation.ui.LogDetailsFragment
@@ -56,8 +53,8 @@ class RecyclerAdapter(private val logs: ArrayList<Logs>) : RecyclerView.Adapter<
 
         fun bindLogs(logs: Logs) {
             this.logs = logs
-            view.itemDate.text = logs.date
-            view.itemTimeIn.text = logs.timeIn
+            view.dateFrom.text = logs.date
+            view.numberOfDays.text = logs.timeIn
             view.itemTimeOut.text = logs.timeOut
         }
 

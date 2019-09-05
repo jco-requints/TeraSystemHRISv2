@@ -67,6 +67,7 @@
     <string name="time_out_title">OUT</string>
     <string name="addtimelog_title">Add Time Log</string>
     <string name="done_title">Done</string>
+    <string name="fileleave_title">File Leave</string>
     <string name="log_date">Log Date</string>
     <string name="time_in_office">Time in Office</string>
     <string name="to_label">To</string>
@@ -86,12 +87,21 @@
     <string name="used_leaves_title">Leaves Used:</string>
     <string name="leave_date_title">DATE</string>
     <string name="no_of_days">NO. OF DAYS</string>
+    <string name="to_title_text">to</string>
+    <string name="start_date_title">Start Date</string>
+    <string name="end_date_title">End Date</string>
 
     <string-array name="log_type">
         <item>Time In</item>
         <item>Break Out</item>
         <item>Break In</item>
         <item>Time Out</item>
+    </string-array>
+
+    <string-array name="time_type">
+        <item>Whole Day</item>
+        <item>Morning</item>
+        <item>Afternoon</item>
     </string-array>
 
 </resources>
