@@ -65,48 +65,55 @@ class MainActivity : AppCompatActivity(), NetworkRequestInterface {
 
     override fun afterNetworkCall(result: String?) {
         progressBarHolder.visibility = View.GONE
-        if (result == "Connection Timeout") {
-            popupHolder.visibility = View.VISIBLE
-            network_status.text = getString(R.string.connection_timeout_message)
+        myDetails = AccountDetails("jericho","2019004","Jericho","Requintina","Magallanes","jericho.magallanes@terasystem.com","+639367412143","+6325569783")
+        val intent = Intent(this@MainActivity,
+            FragmentActivity::class.java).apply {
+            this.putExtra("keyAccountDetails", myDetails)
         }
-        else if(result.isNullOrEmpty())
-        {
-            popupHolder.visibility = View.VISIBLE
-            network_status.text = getString(R.string.server_error)
-        }
-        else
-        {
-            var jsonObject = JSONObject(result)
-            val status = jsonObject?.get("status").toString()
-            if(status == "0")
-            {
-                jsonObject = jsonObject.getJSONObject("user")
-                myDetails = AccountDetails("","","","","","","","")
-                myDetails.username = jsonObject?.get("userID").toString()
-                myDetails.empID = jsonObject?.get("idNumber").toString()
-                myDetails.firstName = jsonObject?.get("firstName").toString()
-                myDetails.middleName = jsonObject?.get("middleName").toString()
-                myDetails.lastName = jsonObject?.get("lastName").toString()
-                myDetails.emailAddress = jsonObject?.get("emailAddress").toString()
-                myDetails.mobileNumber = jsonObject?.get("mobileNumber").toString()
-                myDetails.landlineNumber = jsonObject?.get("landline").toString()
-                val intent = Intent(this@MainActivity,
-                    FragmentActivity::class.java).apply {
-                    this.putExtra("keyAccountDetails", myDetails)
-                }
-                startActivity(intent)
+        startActivity(intent)
 
-            }
-            else
-            {
-                val toast = Toast.makeText(
-                    applicationContext,
-                    "Invalid user name or password",
-                    Toast.LENGTH_SHORT
-                )
-                toast.show()
-            }
-        }
+//        if (result == "Connection Timeout") {
+//            popupHolder.visibility = View.VISIBLE
+//            network_status.text = getString(R.string.connection_timeout_message)
+//        }
+//        else if(result.isNullOrEmpty())
+//        {
+//            popupHolder.visibility = View.VISIBLE
+//            network_status.text = getString(R.string.server_error)
+//        }
+//        else
+//        {
+//            var jsonObject = JSONObject(result)
+//            val status = jsonObject?.get("status").toString()
+//            if(status == "0")
+//            {
+//                jsonObject = jsonObject.getJSONObject("user")
+//                myDetails = AccountDetails("","","","","","","","")
+//                myDetails.username = jsonObject?.get("userID").toString()
+//                myDetails.empID = jsonObject?.get("idNumber").toString()
+//                myDetails.firstName = jsonObject?.get("firstName").toString()
+//                myDetails.middleName = jsonObject?.get("middleName").toString()
+//                myDetails.lastName = jsonObject?.get("lastName").toString()
+//                myDetails.emailAddress = jsonObject?.get("emailAddress").toString()
+//                myDetails.mobileNumber = jsonObject?.get("mobileNumber").toString()
+//                myDetails.landlineNumber = jsonObject?.get("landline").toString()
+//                val intent = Intent(this@MainActivity,
+//                    FragmentActivity::class.java).apply {
+//                    this.putExtra("keyAccountDetails", myDetails)
+//                }
+//                startActivity(intent)
+//
+//            }
+//            else
+//            {
+//                val toast = Toast.makeText(
+//                    applicationContext,
+//                    "Invalid user name or password",
+//                    Toast.LENGTH_SHORT
+//                )
+//                toast.show()
+//            }
+//        }
     }
 
     override

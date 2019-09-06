@@ -53,7 +53,7 @@ class RecyclerAdapter(private val logs: ArrayList<Logs>) : RecyclerView.Adapter<
 
         fun bindLogs(logs: Logs) {
             this.logs = logs
-            view.dateFrom.text = logs.date
+            view.leaveDuration.text = logs.date
             view.numberOfDays.text = logs.timeIn
             view.itemTimeOut.text = logs.timeOut
         }

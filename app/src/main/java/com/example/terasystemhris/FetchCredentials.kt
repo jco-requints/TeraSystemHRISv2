@@ -202,6 +202,65 @@ class FetchCredentials(private var networkRequestInterface: NetworkRequestInterf
         } catch (ex: Exception) {
             Log.d("", "Error in doInBackground ")
         }
+
+        //try catch for File Leave
+        try {
+            val type: String? = parts[2]
+            val dateFrom: String? = parts[3]
+            val dateTo: String? = parts[4]
+            val time: String? = parts[5]
+            var reqParam: String
+            if(dateTo.isNullOrEmpty())
+            {
+                reqParam = URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(userID, "UTF-8")
+                reqParam += "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8")
+                reqParam += "&" + URLEncoder.encode("dateFrom", "UTF-8") + "=" + URLEncoder.encode(dateFrom, "UTF-8")
+                reqParam += "&" + URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(time, "UTF-8")
+            }
+            else
+            {
+               reqParam = URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(userID, "UTF-8")
+                reqParam += "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(type, "UTF-8")
+                reqParam += "&" + URLEncoder.encode("dateFrom", "UTF-8") + "=" + URLEncoder.encode(dateFrom, "UTF-8")
+                reqParam += "&" + URLEncoder.encode("dateTo", "UTF-8") + "=" + URLEncoder.encode(dateTo, "UTF-8")
+                reqParam += "&" + URLEncoder.encode("time", "UTF-8") + "=" + URLEncoder.encode(time, "UTF-8")
+            }
+
+            with(mURL.openConnection() as HttpURLConnection) {
+                requestMethod = "POST"
+                var inputLine: String?
+                handleTimeout { timedOut ->
+                    if (timedOut) {
+                        isTimedOut = true
+                        disconnect()
+                        result = "Connection Timeout"
+                    }
+                }
+
+                if(!isTimedOut)
+                {
+                    val wr = OutputStreamWriter(outputStream)
+                    wr.write(reqParam)
+                    wr.flush()
+
+                    BufferedReader(InputStreamReader(inputStream)).use {
+                        val response = StringBuffer()
+
+                        inputLine = it.readLine()
+                        while (inputLine != null) {
+                            response.append(inputLine)
+                            inputLine = it.readLine()
+
+                        }
+                        result = response.toString()
+                        it.close()
+                    }
+                }
+
+            }
+        } catch (ex: Exception) {
+            Log.d("", "Error in doInBackground ")
+        }
         return result
     }
 

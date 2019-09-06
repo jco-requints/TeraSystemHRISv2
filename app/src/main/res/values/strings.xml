@@ -90,6 +90,7 @@
     <string name="to_title_text">to</string>
     <string name="start_date_title">Start Date</string>
     <string name="end_date_title">End Date</string>
+    <string name="file_leave_date">Date</string>
 
     <string-array name="log_type">
         <item>Time In</item>

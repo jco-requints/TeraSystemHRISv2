@@ -120,8 +120,8 @@ class LeavesFragment : Fragment(), NetworkRequestInterface {
                     leaves.add(leavesList)
                 }
 
-                view?.vacationLeave?.text = remVL.toString()
-                view?.sickLeave?.text = remSL.toString()
+                view?.vacationLeave?.text = trimTrailingZero(remVL.toString())
+                view?.sickLeave?.text = trimTrailingZero(remSL.toString())
                 linearLayoutManager = LinearLayoutManager(this.context)
                 view?.leavesRecyclerView?.layoutManager = linearLayoutManager
                 adapter = LeavesRecyclerAdapter(leaves)
@@ -215,7 +215,7 @@ class LeavesFragment : Fragment(), NetworkRequestInterface {
                     }
                     convertedTime = convertedTime.substring(1, convertedTime.length -1)
                     total = convertedTime.toFloat() + 1
-                    convertedTime = total.toString()
+                    convertedTime = trimTrailingZero(total.toString())
                 }
             }
             else
@@ -226,6 +226,20 @@ class LeavesFragment : Fragment(), NetworkRequestInterface {
         } catch (e: ParseException) {
             e.printStackTrace()
             return convertedTime
+        }
+    }
+
+    fun trimTrailingZero(value: String): String {
+        return if (!value.isNullOrEmpty()) {
+            if (value!!.indexOf(".") < 0) {
+                value
+
+            } else {
+                value.replace("0*$".toRegex(), "").replace("\\.$".toRegex(), "")
+            }
+
+        } else {
+            value
         }
     }
 

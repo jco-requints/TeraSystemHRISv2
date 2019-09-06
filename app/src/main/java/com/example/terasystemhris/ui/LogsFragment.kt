@@ -50,6 +50,7 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
         activity?.backBtn?.visibility = View.GONE
 
         if (isConnected(container!!.context)) {
+            view?.logsProgressBarHolder?.visibility = View.VISIBLE
             FetchCredentials(this).execute(mURL, myDetails?.username)
         }
         else
@@ -79,7 +80,7 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
     }
 
     override fun beforeNetworkCall() {
-        view?.logsProgressBarHolder?.visibility = View.VISIBLE
+//        view?.logsProgressBarHolder?.visibility = View.GONE
     }
 
     override fun afterNetworkCall(result: String?) {
