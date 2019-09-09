@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentTransaction
 import com.example.terasystemhris.AccountDetails
-import com.example.terasystemhris.Logs
 import com.example.terasystemhris.LogsFragment
 import com.example.terasystemhris.R
 import kotlinx.android.synthetic.main.fragment_addtimelogsuccess.view.*
@@ -35,19 +33,19 @@ class AddTimeLogSuccessFragment : Fragment() {
         activity?.toolbar_button?.visibility = View.GONE
         if(logType == 1)
         {
-            view.logType.text = getString(R.string.time_in_text)
+            view.leaveType.text = getString(R.string.time_in_text)
         }
         else if (logType == 2)
         {
-            view.logType.text = getString(R.string.break_out_text)
+            view.leaveType.text = getString(R.string.break_out_text)
         }
         else if(logType == 3)
         {
-            view.logType.text = getString(R.string.break_in_text)
+            view.leaveType.text = getString(R.string.break_in_text)
         }
         else
         {
-            view.logType.text = getString(R.string.time_out_text)
+            view.leaveType.text = getString(R.string.time_out_text)
         }
         view.time.text = currentTime
         view.okBtn?.setOnClickListener {

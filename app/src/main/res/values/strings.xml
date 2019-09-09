@@ -51,6 +51,7 @@
     <string name="no_internet_message">No Internet Connection</string>
     <string name="logs_error_message">Failed to retrieve logs</string>
     <string name="logs_update_error_message">Failed to update logs</string>
+    <string name="leave_update_error_message">Failed to file leave</string>
     <string name="close_icon">X</string>
 
     <string name="logs_icon">Time Logs</string>
@@ -91,6 +92,9 @@
     <string name="start_date_title">Start Date</string>
     <string name="end_date_title">End Date</string>
     <string name="file_leave_date">Date</string>
+    <string name="fileleavesuccess_title">Success</string>
+    <string name="no_type_selected_error">Please Choose Leave Type</string>
+    <string name="date_error">Invalid Start and End Date</string>
 
     <string-array name="log_type">
         <item>Time In</item>

@@ -29,6 +29,17 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent">
 
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/toggleborder"
+                    app:layout_constraintBottom_toBottomOf="@id/remainingLeavesTitle"
+                    app:layout_constraintLeft_toLeftOf="@id/remainingLeavesTitle"
+                    app:layout_constraintRight_toRightOf="@id/remainingLeavesTitle"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/remainingLeavesTitle"
                     android:layout_width="0dp"
@@ -38,13 +49,25 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginRight="24dp"
-                    android:layout_marginBottom="3dp"
+                    android:paddingBottom="16dp"
                     android:text="@string/remaining_leaves_title"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@+id/vacationLeaveTitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/toggleborder"
+                    app:layout_constraintBottom_toBottomOf="@id/vacationLeaveTitle"
+                    app:layout_constraintHorizontal_bias="0.275"
+                    app:layout_constraintLeft_toLeftOf="@id/vacationLeaveTitle"
+                    app:layout_constraintRight_toRightOf="@id/vacationLeave"
+                    app:layout_constraintTop_toBottomOf="@+id/remainingLeavesTitle"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/vacationLeaveTitle"
@@ -53,8 +76,10 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="16dp"
+                    android:paddingBottom="16dp"
                     android:text="@string/vacation_leave_title"
                     android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/view3"
                     app:layout_constraintEnd_toStartOf="@+id/vacationLeave"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/remainingLeavesTitle" />
@@ -62,17 +87,29 @@
                 <TextView
                     android:id="@+id/vacationLeave"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_gravity="end"
                     android:layout_marginEnd="63dp"
                     android:layout_marginRight="63dp"
+                    android:paddingBottom="16dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/vacationLeaveTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/vacationLeaveTitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/vacationLeaveTitle"
+                    app:layout_constraintTop_toTopOf="@+id/vacationLeaveTitle"
                     tools:text="7" />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/toggleborder"
+                    app:layout_constraintBottom_toBottomOf="@id/sickLeaveTitle"
+                    app:layout_constraintLeft_toLeftOf="@id/sickLeaveTitle"
+                    app:layout_constraintRight_toRightOf="@id/sickLeave"
+                    app:layout_constraintTop_toBottomOf="@+id/vacationLeaveTitle" />
 
                 <TextView
                     android:id="@+id/sickLeaveTitle"
@@ -81,8 +118,10 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="16dp"
+                    android:paddingBottom="16dp"
                     android:text="@string/sick_leave_title"
                     android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/view4"
                     app:layout_constraintEnd_toStartOf="@+id/sickLeave"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vacationLeaveTitle" />
@@ -90,17 +129,29 @@
                 <TextView
                     android:id="@+id/sickLeave"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_gravity="end"
                     android:layout_marginEnd="63dp"
                     android:layout_marginRight="63dp"
+                    android:paddingBottom="16dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/sickLeaveTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/sickLeaveTitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/sickLeaveTitle"
+                    app:layout_constraintTop_toTopOf="@+id/sickLeaveTitle"
                     tools:text="12.5" />
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/toggleborder"
+                    app:layout_constraintBottom_toBottomOf="@id/usedLeavesTitle"
+                    app:layout_constraintLeft_toLeftOf="@id/usedLeavesTitle"
+                    app:layout_constraintRight_toRightOf="@id/usedLeavesTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/sickLeaveTitle" />
 
                 <TextView
                     android:id="@+id/usedLeavesTitle"
@@ -108,14 +159,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginRight="24dp"
+                    android:paddingBottom="16dp"
                     android:text="@string/used_leaves_title"
                     android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/leaveDate"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/sickLeaveTitle" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/toggleborder"
+                    app:layout_constraintBottom_toBottomOf="@+id/leaveDate"
+                    app:layout_constraintLeft_toLeftOf="@id/leaveDate"
+                    app:layout_constraintRight_toRightOf="@id/numberOfDaysTitle"
+                    app:layout_constraintTop_toBottomOf="@id/usedLeavesTitle"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/leaveDate"
@@ -123,7 +187,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
+                    android:paddingBottom="8dp"
                     android:text="@string/leave_date_title"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -135,16 +200,18 @@
                 <TextView
                     android:id="@+id/numberOfDaysTitle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_gravity="end"
                     android:layout_marginEnd="24dp"
                     android:layout_marginRight="24dp"
+                    android:paddingBottom="8dp"
                     android:text="@string/no_of_days"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/leaveDate"
+                    app:layout_constraintBottom_toBottomOf="@+id/leaveDate"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/leaveDate" />
+                    app:layout_constraintStart_toEndOf="@+id/leaveDate"
+                    app:layout_constraintTop_toTopOf="@+id/leaveDate" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

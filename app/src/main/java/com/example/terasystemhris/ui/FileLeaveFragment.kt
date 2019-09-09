@@ -17,30 +17,24 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.example.terasystemhris.*
-import kotlinx.android.synthetic.main.fragment_addtimelog.view.*
 import kotlinx.android.synthetic.main.fragment_addtimelog.view.network_status
 import kotlinx.android.synthetic.main.fragment_addtimelog.view.popupHolder
 import kotlinx.android.synthetic.main.fragment_addtimelog.view.progressBar
 import kotlinx.android.synthetic.main.fragment_addtimelog.view.spinner
 import kotlinx.android.synthetic.main.fragment_addtimelog.view.txtclose
-import kotlinx.android.synthetic.main.fragment_fileleave.*
 import kotlinx.android.synthetic.main.fragment_fileleave.view.*
-import kotlinx.android.synthetic.main.fragment_logs.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.json.JSONObject
 import java.net.URL
-import java.text.DateFormat
-import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.util.*
 
 class FileLeaveFragment : Fragment(), NetworkRequestInterface {
 
     private var myDetails: AccountDetails = AccountDetails("","","","","","","","")
+    private lateinit var selectedTypeofLeave: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bundle = this.arguments
@@ -75,8 +69,7 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
         }
 
         //code for Leave toggle
-
-        var selectedTypeofLeave = ""
+        selectedTypeofLeave = ""
 
         view.vlToggle.setOnClickListener {
             view.vlToggle.setBackgroundColor(Color.parseColor("#1D8ECE"))
@@ -119,13 +112,13 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
                 {
                     getView()?.endDateHolder?.visibility = View.VISIBLE
                     getView()?.endDate?.text = formatted
-                    getView()?.startDateTitle?.text = getString(R.string.start_date_title)
+                    getView()?.startDateSuccessTitle?.text = getString(R.string.start_date_title)
                 }
                 else
                 {
                     getView()?.endDateHolder?.visibility = View.GONE
                     getView()?.endDate?.text = null
-                    getView()?.startDateTitle?.text = getString(R.string.file_leave_date)
+                    getView()?.startDateSuccessTitle?.text = getString(R.string.file_leave_date)
                 }
             }
 
@@ -162,15 +155,30 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
 
         activity?.toolbar_button?.setOnClickListener {
             if (isConnected(container!!.context)) {
+                var isDateValid = true
                 val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingAddLeave.htm").toString()
+                if(!view.endDate.text.isNullOrEmpty())
+                {
+                    isDateValid = isDateValid(view.startDate.text.toString(), view.endDate.text.toString())
+                }
                 val itemSelected = view.spinner.selectedItemPosition + 1
-                if(view.endDate != null)
+                if(view.endDate.text != null && isDateValid && selectedTypeofLeave != "")
                 {
                     FetchCredentials(this).execute(mURL, myDetails.username, selectedTypeofLeave, convertDateToStandardForm(view.startDate.text.toString()), convertDateToStandardForm(view.endDate.text.toString()), itemSelected.toString())
                 }
-                else
+                else if(view.endDate.text.isNullOrEmpty() || view.endDate.text == "" && selectedTypeofLeave != "")
                 {
                     FetchCredentials(this).execute(mURL, myDetails.username, selectedTypeofLeave, view.startDate.text.toString(), null, itemSelected.toString())
+                }
+                else if(selectedTypeofLeave == "")
+                {
+                    view.popupHolder.visibility = View.VISIBLE
+                    view.network_status.text = getString(R.string.no_type_selected_error)
+                }
+                else if(view.endDate.text != null && !isDateValid)
+                {
+                    view.popupHolder.visibility = View.VISIBLE
+                    view.network_status.text = getString(R.string.date_error)
                 }
             }
             else
@@ -215,44 +223,25 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
             val status = jsonObject?.get("status").toString()
             if(status == "0")
             {
-//                val itemSelected = view?.spinner?.selectedItemPosition?.plus(1)
-//                val mBundle = Bundle()
-//                val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    LocalDateTime.now()
-//                } else {
-//                    TODO("VERSION.SDK_INT < O")
-//                }
-//                val formatter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    DateTimeFormatter.ofPattern("h:mm a")
-//                } else {
-//                    TODO("VERSION.SDK_INT < O")
-//                }
-//                val formatted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                    current.format(formatter)
-//                } else {
-//                    TODO("VERSION.SDK_INT < O")
-//                }
-//                val fragmentManager = activity?.supportFragmentManager
-//                val fragment = AddTimeLogSuccessFragment()
-//                mBundle.putInt("logType", itemSelected!!)
-//                mBundle.putString("currentTime", formatted)
-//                mBundle.putParcelable("keyAccountDetails", myDetails)
-//                fragment.arguments = mBundle
-//                val fragmentTransaction = fragmentManager?.beginTransaction()?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//                fragmentTransaction?.replace(R.id.container, fragment)
-//                fragmentTransaction?.addToBackStack(null)
-//                fragmentTransaction?.commit()
-                val toast = Toast.makeText(
-                    context,
-                    "Success",
-                    Toast.LENGTH_SHORT
-                )
-                toast.show()
+                val itemSelected = view?.spinner?.selectedItemPosition?.plus(1)
+                val mBundle = Bundle()
+                val fragmentManager = activity?.supportFragmentManager
+                val fragment = FileLeaveSuccessFragment()
+                mBundle.putString("typeOfLeave", selectedTypeofLeave)
+                mBundle.putInt("time", itemSelected!!)
+                mBundle.putString("startDate", view?.startDate?.text.toString())
+                mBundle.putString("endDate", view?.endDate?.text.toString())
+                mBundle.putParcelable("keyAccountDetails", myDetails)
+                fragment.arguments = mBundle
+                val fragmentTransaction = fragmentManager?.beginTransaction()?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                fragmentTransaction?.replace(R.id.container, fragment)
+                fragmentTransaction?.addToBackStack(null)
+                fragmentTransaction?.commit()
             }
             else
             {
                 view?.popupHolder?.visibility = View.VISIBLE
-                view?.network_status?.text = getString(R.string.logs_update_error_message)
+                view?.network_status?.text = getString(R.string.leave_update_error_message)
             }
         }
     }
@@ -260,7 +249,7 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
     private fun convertDateToStandardForm(date: String): String {
 
         val currentFormatOfDateToConvert = SimpleDateFormat("MMMM d yyyy")
-        val formatToBeConvertedInto = SimpleDateFormat("MM-dd-yyyy")
+        val formatToBeConvertedInto = SimpleDateFormat("yyyy-MM-dd")
         try {
             val stringParsedToDate = currentFormatOfDateToConvert.parse(date)
             return formatToBeConvertedInto.format(stringParsedToDate)
@@ -268,6 +257,17 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
             e.printStackTrace()
             return ""
         }
+    }
+
+    private fun isDateValid(startDate: String, endDate: String): Boolean {
+        val currentFormatOfDateToConvert = SimpleDateFormat("MMMM d yyyy")
+        val startDateParsedToDate = currentFormatOfDateToConvert.parse(startDate)
+        val endDateParsedToDate = currentFormatOfDateToConvert.parse(endDate)
+        if(startDateParsedToDate.before(endDateParsedToDate) || (startDateParsedToDate.compareTo(endDateParsedToDate) == 0))
+        {
+            return true
+        }
+        return false
     }
 
     companion object {
