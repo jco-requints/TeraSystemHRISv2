@@ -33,21 +33,23 @@
                     android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginTop="32dp"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.026"/>
+
             <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/timeIn"
-                    tools:text="N/A"
-                    android:textAlignment="center"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/to_label1"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/office_label"
-                    android:layout_marginTop="16dp"/>
+                android:id="@+id/timeIn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/to_label1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/office_label"
+                tools:text="N/A" />
             <TextView
                     android:text="@string/to_label"
                     android:textAlignment="center"
@@ -62,20 +64,22 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/timeIn"/>
+
             <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/timeOut"
-                    tools:text="5:50 PM"
-                    android:textSize="24sp"
-                    android:textAlignment="center"
-                    app:layout_constraintStart_toEndOf="@+id/to_label1"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/to_label1"/>
+                android:id="@+id/timeOut"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/to_label1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/to_label1"
+                tools:text="5:50 PM" />
 
             <TextView
                     android:text="@string/break_in_office"
@@ -86,22 +90,25 @@
                     android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginTop="32dp"
                     app:layout_constraintTop_toBottomOf="@+id/timeIn" app:layout_constraintHorizontal_bias="0.026"/>
+
             <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/breakIn"
-                    tools:text="12:02 PM"
-                    android:textAlignment="center"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@+id/to_label2"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/break_label"
-                    android:layout_marginTop="16dp" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                android:id="@+id/breakIn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/to_label2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/break_label"
+                tools:text="12:02 PM" />
             <TextView
                     android:text="@string/to_label"
                     android:textAlignment="center"
@@ -116,20 +123,22 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/breakIn"/>
+
             <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/breakOut"
-                    tools:text="12:34 PM"
-                    android:textSize="24sp"
-                    android:textAlignment="center"
-                    app:layout_constraintStart_toEndOf="@+id/to_label2"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/to_label2"/>
+                android:id="@+id/breakOut"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/to_label2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/to_label2"
+                tools:text="12:34 PM" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

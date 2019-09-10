@@ -24,30 +24,21 @@ class RecyclerAdapter(private val logs: ArrayList<Logs>) : RecyclerView.Adapter<
         holder.bindLogs(itemLogs)
     }
 
-    //1
     class LogsHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        //2
+
         private var view: View = v
         private var logs: Logs? = null
 
-        //3
         init {
             v.setOnClickListener(this)
         }
 
-        //4
         override fun onClick(v: View) {
             val item = logs!!
             fragmentJump(item)
-
-//            val context = itemView.context
-//            val showLogIntent = Intent(context, LogDetailsFragment::class.java)
-//            showPhotoIntent.putExtra(LOGS_KEY, logs)
-//            context.startActivity(showLogIntent)
         }
 
         companion object {
-            //5
             private val LOGS_KEY = "LOGS"
         }
 
@@ -64,11 +55,6 @@ class RecyclerAdapter(private val logs: ArrayList<Logs>) : RecyclerView.Adapter<
             val fragment = LogDetailsFragment()
             fragment.arguments = mBundle
             switchContent(R.id.container, fragment)
-//            val fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager()
-//            val fragmentTransaction = fragmentManager?.beginTransaction()?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//            fragmentTransaction?.replace(R.id.content, fragment)
-//            fragmentTransaction?.addToBackStack(null)
-//            fragmentTransaction?.commit()
         }
 
         private fun switchContent(id: Int, fragment: Fragment) {

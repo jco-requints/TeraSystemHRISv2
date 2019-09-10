@@ -1,9 +1,7 @@
 package com.example.terasystemhris
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.KeyEvent
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -14,18 +12,15 @@ import com.example.bottomnavigation.helper.BottomNavigationPosition
 import com.example.bottomnavigation.helper.createFragment
 import com.example.bottomnavigation.helper.findNavigationPositionById
 import com.example.bottomnavigation.helper.getTag
-import com.example.bottomnavigation.ui.ClientsFragment
-import com.example.bottomnavigation.ui.LeavesFragment
-import com.example.bottomnavigation.ui.ProfileFragment
+import com.example.bottomnavigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.fragment_main.*
 
 class FragmentActivity : AppCompatActivity() {
 
     private val KEY_POSITION = "keyPosition"
 
     private var navPosition: BottomNavigationPosition = BottomNavigationPosition.LOGS
-
-//    private lateinit var myDetails: AccountDetails
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,15 +83,31 @@ class FragmentActivity : AppCompatActivity() {
         return supportFragmentManager.findFragmentByTag(position.getTag()) ?: position.createFragment(bundle)
     }
 
-//    override
-//    fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-//        return if (keyCode == KeyEvent.KEYCODE_BACK) {
-//            super.onBackPressed()
-//            val intent = Intent(this@FragmentActivity, MainActivity::class.java).apply {
-//                this.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-//            }
-//            startActivity(intent)
-//            true
-//        } else super.onKeyDown(keyCode, event)
-//    }
+    override fun onBackPressed() {
+        val count = supportFragmentManager.backStackEntryCount
+        val data = intent.extras
+        val accountDetails = data?.getParcelable<AccountDetails>("keyAccountDetails")!!
+        val bundle = Bundle()
+        val fragment = supportFragmentManager.findFragmentById(container.id)
+
+        when (fragment) {
+            is LogsFragment -> finish()
+
+            is AddTimeLogFragment,
+            is AddTimeLogSuccessFragment,
+            is FileLeaveFragment,
+            is FileLeaveSuccessFragment -> super.onBackPressed()
+
+            else -> findViewById<BottomNavigationView>(R.id.bottom_navigation).apply {
+                active(0) // Extension function
+                val fragmentManager = supportFragmentManager
+                val fragment = LogsFragment()
+                bundle.putParcelable("keyAccountDetails", accountDetails)
+                fragment.arguments = bundle
+                val fragmentTransaction = fragmentManager?.beginTransaction()
+                fragmentTransaction?.replace(R.id.container, fragment)
+                fragmentTransaction?.commit()
+            }
+        }
+    }
 }

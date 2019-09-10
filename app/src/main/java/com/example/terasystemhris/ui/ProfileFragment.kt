@@ -74,6 +74,8 @@ class ProfileFragment : Fragment() {
         }
     }
 
+
+
     private fun maskEmail(email: String?): String{
         val email_id: String? = email?.substringBeforeLast("@")
         var masked_email: String = ""

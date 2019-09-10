@@ -126,6 +126,7 @@ class LeavesFragment : Fragment(), NetworkRequestInterface {
                 view?.leavesRecyclerView?.layoutManager = linearLayoutManager
                 adapter = LeavesRecyclerAdapter(leaves)
                 view?.leavesRecyclerView?.adapter = adapter
+                view?.leavesRecyclerView?.isNestedScrollingEnabled = false
             } else {
                 view?.popupHolder?.visibility = View.VISIBLE
                 view?.network_status?.text = getString(R.string.logs_error_message)

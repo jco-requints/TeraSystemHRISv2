@@ -2,13 +2,11 @@ package com.example.terasystemhris
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,12 +17,7 @@ import org.json.JSONObject
 import java.net.URL
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.*
-import java.util.logging.SimpleFormatter
 
 
 class LogsFragment : Fragment(), NetworkRequestInterface {
@@ -80,7 +73,7 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
     }
 
     override fun beforeNetworkCall() {
-//        view?.logsProgressBarHolder?.visibility = View.GONE
+
     }
 
     override fun afterNetworkCall(result: String?) {

@@ -19,30 +19,20 @@ class LeavesRecyclerAdapter(private val leaves: ArrayList<Leaves>) : RecyclerVie
         holder.bindLeaves(itemLeaves)
     }
 
-    //1
     class LeavesHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        //2
+
         private var view: View = v
         private var leaves: Leaves? = null
 
-        //3
         init {
             v.setOnClickListener(this)
         }
 
-        //4
         override fun onClick(v: View) {
-//            val item = leaves!!
-//            fragmentJump(item)
 
-//            val context = itemView.context
-//            val showLogIntent = Intent(context, LogDetailsFragment::class.java)
-//            showPhotoIntent.putExtra(LOGS_KEY, logs)
-//            context.startActivity(showLogIntent)
         }
 
         companion object {
-            //5
             private val LEAVES_KEY = "LEAVES"
         }
 
@@ -67,27 +57,6 @@ class LeavesRecyclerAdapter(private val leaves: ArrayList<Leaves>) : RecyclerVie
             }
 
         }
-
-//        fun fragmentJump(leaves: Leaves){
-//            val mBundle = Bundle()
-//            mBundle.putParcelable("item_selected_key", leaves)
-//            val fragment = LogDetailsFragment()
-//            fragment.arguments = mBundle
-//            switchContent(R.id.container, fragment)
-//            val fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager()
-//            val fragmentTransaction = fragmentManager?.beginTransaction()?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//            fragmentTransaction?.replace(R.id.content, fragment)
-//            fragmentTransaction?.addToBackStack(null)
-//            fragmentTransaction?.commit()
-//        }
-
-//        private fun switchContent(id: Int, fragment: Fragment) {
-//            val context = itemView.context ?: return
-//            if (context is FragmentActivity) {
-//                context.switchContent(id, fragment)
-//            }
-//
-//        }
 
     }
 
