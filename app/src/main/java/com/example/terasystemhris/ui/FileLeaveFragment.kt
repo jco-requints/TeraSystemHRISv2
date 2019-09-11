@@ -16,13 +16,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.FragmentTransaction
 import com.example.terasystemhris.*
-import kotlinx.android.synthetic.main.fragment_addtimelog.view.network_status
-import kotlinx.android.synthetic.main.fragment_addtimelog.view.popupHolder
-import kotlinx.android.synthetic.main.fragment_addtimelog.view.progressBar
-import kotlinx.android.synthetic.main.fragment_addtimelog.view.spinner
-import kotlinx.android.synthetic.main.fragment_addtimelog.view.txtclose
+import kotlinx.android.synthetic.main.fragment_fileleave.view.network_status
+import kotlinx.android.synthetic.main.fragment_fileleave.view.popupHolder
+import kotlinx.android.synthetic.main.fragment_fileleave.view.spinner
+import kotlinx.android.synthetic.main.fragment_fileleave.view.txtclose
 import kotlinx.android.synthetic.main.fragment_fileleave.view.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -31,24 +29,25 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class FileLeaveFragment : Fragment(), NetworkRequestInterface {
-
+    private var myInterface: AppBarController? = null
     private var myDetails: AccountDetails = AccountDetails("","","","","","","","")
     private lateinit var selectedTypeofLeave: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val bundle = this.arguments
+
         if (bundle != null)
         {
             myDetails = bundle.getParcelable("keyAccountDetails")!!
         }
         activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_fileleave, container, false)
-        activity?.toolbar_title?.text = getString(R.string.fileleave_title)
-        activity?.toolbar_button?.text = getString(R.string.done_title)
-        activity?.toolbar_button?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
-        activity?.backBtn?.visibility = View.VISIBLE
-        activity?.backBtn?.text = getString(R.string.cancel_title)
-        activity?.backBtn?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
+        myInterface?.setTitle(getString(R.string.fileleave_title))
+        myInterface?.setAddButtonTitle(getString(R.string.done_title))
+        myInterface?.setCancelButtonTitle(getString(R.string.cancel_title))
+        myInterface?.getAddButton()?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
+        myInterface?.getCancelButton()?.visibility = View.VISIBLE
+        myInterface?.getCancelButton()?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
 
         //code to get current date
         val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -152,7 +151,7 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
             dpd.show()
         }
 
-        activity?.toolbar_button?.setOnClickListener {
+        myInterface?.getAddButton()?.setOnClickListener {
             if (isConnected(container!!.context)) {
                 var isDateValid = true
                 val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingAddLeave.htm").toString()
@@ -191,8 +190,8 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
             view.popupHolder.visibility = View.GONE
         }
 
-        activity?.backBtn?.setOnClickListener {
-            val fragmentManager = activity?.supportFragmentManager
+        myInterface?.getCancelButton()?.setOnClickListener {
+            val fragmentManager = myInterface?.getSupportFragmentManager()
             fragmentManager?.popBackStackImmediate()
         }
 
@@ -200,12 +199,21 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
         return view
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        if(context is AppBarController)
+        {
+            myInterface = context
+        }
+    }
+
     override fun beforeNetworkCall() {
-        view?.progressBar?.visibility = View.VISIBLE
+        view?.progressBarHolder?.visibility = View.VISIBLE
     }
 
     override fun afterNetworkCall(result: String?) {
-        view?.progressBar?.visibility = View.GONE
+        view?.progressBarHolder?.visibility = View.GONE
         if(result == "Connection Timeout")
         {
             view?.popupHolder?.visibility = View.VISIBLE
@@ -224,7 +232,7 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
             {
                 val itemSelected = view?.spinner?.selectedItemPosition?.plus(1)
                 val mBundle = Bundle()
-                val fragmentManager = activity?.supportFragmentManager
+                val fragmentManager = myInterface?.getSupportFragmentManager()
                 val fragment = FileLeaveSuccessFragment()
                 mBundle.putString("typeOfLeave", selectedTypeofLeave)
                 mBundle.putInt("time", itemSelected!!)

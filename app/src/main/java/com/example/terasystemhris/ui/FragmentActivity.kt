@@ -2,8 +2,10 @@ package com.example.terasystemhris
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.bottomnavigation.extension.active
 import com.example.bottomnavigation.extension.attach
@@ -16,7 +18,7 @@ import com.example.bottomnavigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class FragmentActivity : AppCompatActivity() {
+class FragmentActivity : AppCompatActivity(), AppBarController {
 
     private val KEY_POSITION = "keyPosition"
 
@@ -110,4 +112,33 @@ class FragmentActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun setTitle(title: String) {
+        title_toolbar.text = title
+    }
+
+    override fun setCancelButtonTitle(cancelTitle: String?) {
+        backBtn.text = cancelTitle
+    }
+
+    override fun setAddButtonTitle(addTitle: String?) {
+        toolbar_button.text = addTitle
+    }
+
+    override fun getToolBar(): Toolbar {
+        return toolbar
+    }
+
+    override fun getCancelButton(): Button {
+        return backBtn
+    }
+
+    override fun getAddButton(): Button {
+        return toolbar_button
+    }
+
+    override fun getSupportFragmentManager(): FragmentManager {
+        return super.getSupportFragmentManager()
+    }
+
 }

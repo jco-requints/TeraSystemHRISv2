@@ -27,6 +27,7 @@ import java.time.format.DateTimeFormatter
 
 class LeavesFragment : Fragment(), NetworkRequestInterface {
 
+    private var myInterface: AppBarController? = null
     lateinit var leavesList: Leaves
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: LeavesRecyclerAdapter
@@ -41,11 +42,12 @@ class LeavesFragment : Fragment(), NetworkRequestInterface {
         activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_leaves, container, false)
         val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingGetLeaves.htm").toString()
-        activity?.toolbar_title?.text = getString(R.string.leaves_title)
-        activity?.toolbar_button?.text = "+"
-        activity?.toolbar_button?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36F)
-        activity?.toolbar_button?.visibility = View.VISIBLE
-        activity?.backBtn?.visibility = View.GONE
+        myInterface?.setTitle(getString(R.string.leaves_title))
+        myInterface?.setAddButtonTitle("+")
+        myInterface?.setCancelButtonTitle(null)
+        myInterface?.getAddButton()?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36F)
+        myInterface?.getAddButton()?.visibility = View.VISIBLE
+        myInterface?.getCancelButton()?.visibility = View.GONE
 
         if (isConnected(container!!.context)) {
             FetchCredentials(this).execute(mURL, myDetails?.username)
@@ -57,9 +59,9 @@ class LeavesFragment : Fragment(), NetworkRequestInterface {
         }
 
         //Logic for + button
-        activity?.toolbar_button?.setOnClickListener {
+        myInterface?.getAddButton()?.setOnClickListener {
             val mBundle = Bundle()
-            val fragmentManager = activity?.supportFragmentManager
+            val fragmentManager = myInterface?.getSupportFragmentManager()
             val fragment = FileLeaveFragment()
             mBundle.putParcelable("keyAccountDetails", myDetails)
             fragment.arguments = mBundle
@@ -74,6 +76,15 @@ class LeavesFragment : Fragment(), NetworkRequestInterface {
         }
 
         return view
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        if(context is AppBarController)
+        {
+            myInterface = context
+        }
     }
 
     override fun beforeNetworkCall() {
@@ -142,7 +153,7 @@ class LeavesFragment : Fragment(), NetworkRequestInterface {
     }
 
     private fun convertDateToHumanDate(leaveDate: String): String {
-        val humanDateFormat = SimpleDateFormat("MMMM dd")
+        val humanDateFormat = SimpleDateFormat("MMMM d")
         val cal = Calendar.getInstance()
         try {
             if(leaveDate != "null")

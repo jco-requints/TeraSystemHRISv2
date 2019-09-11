@@ -22,6 +22,7 @@ import java.util.*
 
 class LogsFragment : Fragment(), NetworkRequestInterface {
 
+    private var myInterface: AppBarController? = null
     lateinit var logsList: Logs
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: RecyclerAdapter
@@ -36,14 +37,16 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
         activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_logs, container, false)
         val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingGetTimeLogs.htm").toString()
-        activity?.toolbar_title?.text = getString(R.string.logs_title)
-        activity?.toolbar_button?.text = "+"
-        activity?.toolbar_button?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36F)
-        activity?.toolbar_button?.visibility = View.VISIBLE
-        activity?.backBtn?.visibility = View.GONE
+        myInterface?.setTitle(getString(R.string.logs_title))
+        myInterface?.setAddButtonTitle("+")
+        myInterface?.setCancelButtonTitle(null)
+        myInterface?.getAddButton()?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36F)
+        myInterface?.getAddButton()?.visibility = View.VISIBLE
+        myInterface?.getCancelButton()?.visibility = View.GONE
+
+        view?.logsProgressBarHolder?.visibility = View.VISIBLE
 
         if (isConnected(container!!.context)) {
-            view?.logsProgressBarHolder?.visibility = View.VISIBLE
             FetchCredentials(this).execute(mURL, myDetails?.username)
         }
         else
@@ -53,9 +56,9 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
         }
 
         //Logic for + button
-        activity?.toolbar_button?.setOnClickListener {
+        myInterface?.getAddButton()?.setOnClickListener {
             val mBundle = Bundle()
-            val fragmentManager = activity?.supportFragmentManager
+            val fragmentManager = myInterface?.getSupportFragmentManager()
             val fragment = AddTimeLogFragment()
             mBundle.putParcelable("keyAccountDetails", myDetails)
             fragment.arguments = mBundle
@@ -70,6 +73,15 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
         }
 
         return view
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        if(context is AppBarController)
+        {
+            myInterface = context
+        }
     }
 
     override fun beforeNetworkCall() {
@@ -122,7 +134,7 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
 
     private fun convertDateToHumanDate(logDate: String): String {
 
-        val humanDateFormat = SimpleDateFormat("MMMM dd")
+        val humanDateFormat = SimpleDateFormat("MMMM d")
         try {
             val parsedDateFormat = Date(logDate.toLong())
             val cal = Calendar.getInstance()

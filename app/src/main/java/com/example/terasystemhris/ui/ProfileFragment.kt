@@ -1,6 +1,7 @@
 package com.example.bottomnavigation.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
@@ -8,15 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.terasystemhris.AccountDetails
-import com.example.terasystemhris.MainActivity
-import com.example.terasystemhris.R
-import com.example.terasystemhris.Update
+import com.example.terasystemhris.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 class ProfileFragment : Fragment() {
 
+    private var myInterface: AppBarController? = null
     private var myDetails: AccountDetails = AccountDetails("","","","","","","","")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,12 +26,13 @@ class ProfileFragment : Fragment() {
         }
         activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        activity?.toolbar_title?.text = getString(R.string.profile_title)
-        activity?.toolbar_button?.setBackgroundResource(0)
-        activity?.toolbar_button?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
-        activity?.toolbar_button?.text = getString(R.string.title_activity_logout)
-        activity?.toolbar_button?.visibility = View.VISIBLE
-        activity?.backBtn?.visibility = View.GONE
+        myInterface?.setTitle(getString(R.string.profile_title))
+        myInterface?.setAddButtonTitle(getString(R.string.title_activity_logout))
+        myInterface?.setCancelButtonTitle(null)
+        myInterface?.getAddButton()?.setBackgroundResource(0)
+        myInterface?.getAddButton()?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
+        myInterface?.getAddButton()?.visibility = View.VISIBLE
+        myInterface?.getCancelButton()?.visibility = View.GONE
         val profile_name = if(myDetails.middleName != "" && myDetails.middleName != "null")
         {
             ("${myDetails.firstName} ${myDetails.middleName} ${myDetails.lastName}").toUpperCase()
@@ -56,7 +56,7 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
             (activity as Activity).overridePendingTransition(0, 0)
         }
-        activity?.toolbar_button?.setOnClickListener{
+        myInterface?.getAddButton()?.setOnClickListener{
             val intent = Intent(activity, MainActivity::class.java).apply {
                 this.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             }
@@ -65,6 +65,15 @@ class ProfileFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        if(context is AppBarController)
+        {
+            myInterface = context
+        }
     }
 
     companion object {

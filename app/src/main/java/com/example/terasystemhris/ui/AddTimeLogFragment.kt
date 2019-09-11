@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.FragmentTransaction
 import com.example.terasystemhris.*
 import kotlinx.android.synthetic.main.fragment_addtimelog.view.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import org.json.JSONObject
 import java.net.URL
 import java.time.LocalDateTime
@@ -22,6 +21,7 @@ import java.time.format.DateTimeFormatter
 
 class AddTimeLogFragment : Fragment(), NetworkRequestInterface {
 
+    private var myInterface: AppBarController? = null
     private var myDetails: AccountDetails = AccountDetails("","","","","","","","")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,17 +32,18 @@ class AddTimeLogFragment : Fragment(), NetworkRequestInterface {
         }
         activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_addtimelog, container, false)
-        activity?.toolbar_title?.text = getString(R.string.addtimelog_title)
-        activity?.toolbar_button?.text = getString(R.string.done_title)
-        activity?.toolbar_button?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
-        activity?.backBtn?.visibility = View.VISIBLE
-        activity?.backBtn?.text = getString(R.string.cancel_title)
-        activity?.backBtn?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
+        myInterface?.setTitle(getString(R.string.addtimelog_title))
+        myInterface?.setAddButtonTitle(getString(R.string.done_title))
+        myInterface?.setCancelButtonTitle(getString(R.string.cancel_title))
+        myInterface?.getAddButton()?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
+        myInterface?.getCancelButton()?.visibility = View.VISIBLE
+        myInterface?.getCancelButton()?.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
         val adapter = ArrayAdapter.createFromResource(view.context,
             R.array.log_type, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         view.spinner?.adapter = adapter
-        activity?.toolbar_button?.setOnClickListener {
+        myInterface?.getAddButton()?.setOnClickListener {
+//            view?.progressBarHolder?.visibility = View.VISIBLE
             if (isConnected(container!!.context)) {
                 val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingAddTimeLog.htm").toString()
                 val itemSelected = view.spinner.selectedItemPosition + 1
@@ -50,7 +51,7 @@ class AddTimeLogFragment : Fragment(), NetworkRequestInterface {
             }
             else
             {
-                view.popupHolder.visibility = View.VISIBLE
+                view.popupHolder.visibility = View.GONE
                 view.network_status.text = getString(R.string.no_internet_message)
             }
         }
@@ -59,8 +60,8 @@ class AddTimeLogFragment : Fragment(), NetworkRequestInterface {
             view.popupHolder.visibility = View.GONE
         }
 
-        activity?.backBtn?.setOnClickListener {
-            val fragmentManager = activity?.supportFragmentManager
+        myInterface?.getCancelButton()?.setOnClickListener {
+            val fragmentManager = myInterface?.getSupportFragmentManager()
             fragmentManager?.popBackStackImmediate()
         }
 
@@ -68,12 +69,21 @@ class AddTimeLogFragment : Fragment(), NetworkRequestInterface {
         return view
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        if(context is AppBarController)
+        {
+            myInterface = context
+        }
+    }
+
     override fun beforeNetworkCall() {
-        view?.progressBar?.visibility = View.VISIBLE
+        view?.progressBarHolder?.visibility = View.VISIBLE
     }
 
     override fun afterNetworkCall(result: String?) {
-        view?.progressBar?.visibility = View.GONE
+        view?.progressBarHolder?.visibility = View.GONE
         if(result == "Connection Timeout")
         {
             view?.popupHolder?.visibility = View.VISIBLE
@@ -107,7 +117,7 @@ class AddTimeLogFragment : Fragment(), NetworkRequestInterface {
                 } else {
                     TODO("VERSION.SDK_INT < O")
                 }
-                val fragmentManager = activity?.supportFragmentManager
+                val fragmentManager = myInterface?.getSupportFragmentManager()
                 val fragment = AddTimeLogSuccessFragment()
                 mBundle.putInt("logType", itemSelected!!)
                 mBundle.putString("currentTime", formatted)
