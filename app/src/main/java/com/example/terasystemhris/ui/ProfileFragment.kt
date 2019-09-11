@@ -24,7 +24,6 @@ class ProfileFragment : Fragment() {
         {
             myDetails = bundle.getParcelable("keyAccountDetails")!!
         }
-        activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         myInterface?.setTitle(getString(R.string.profile_title))
         myInterface?.setAddButtonTitle(getString(R.string.title_activity_logout))
@@ -87,7 +86,7 @@ class ProfileFragment : Fragment() {
 
     private fun maskEmail(email: String?): String{
         val email_id: String? = email?.substringBeforeLast("@")
-        var masked_email: String = ""
+        var masked_email = ""
         val email_initials = email?.substring(0..3)
         val hide_email = email?.replaceBefore('@', "*****")
         if(email_id!!.count() <= 3)

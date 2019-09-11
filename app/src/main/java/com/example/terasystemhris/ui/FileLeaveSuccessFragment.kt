@@ -33,7 +33,6 @@ class FileLeaveSuccessFragment : Fragment() {
             endDate = bundle.getString("endDate")!!
             myDetails = bundle.getParcelable("keyAccountDetails")!!
         }
-        activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_fileleavesuccess, container, false)
         myInterface?.setTitle(getString(R.string.fileleavesuccess_title))
         myInterface?.setAddButtonTitle(null)

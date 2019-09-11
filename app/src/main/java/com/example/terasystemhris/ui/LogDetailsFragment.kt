@@ -25,7 +25,6 @@ class LogDetailsFragment : Fragment() {
         {
             logDetails = bundle.getParcelable("item_selected_key")!!
         }
-        activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_logdetails, container, false)
         myInterface?.setTitle(logDetails.date)
         myInterface?.setAddButtonTitle(null)

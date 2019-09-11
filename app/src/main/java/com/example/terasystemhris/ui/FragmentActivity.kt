@@ -28,6 +28,7 @@ class FragmentActivity : AppCompatActivity(), AppBarController {
         super.onCreate(savedInstanceState)
         restoreSaveInstanceState(savedInstanceState)
         setContentView(R.layout.fragment_main)
+        this.title = null
         val data = intent.extras
         val accountDetails = data?.getParcelable<AccountDetails>("keyAccountDetails")!!
         val bundle = Bundle()

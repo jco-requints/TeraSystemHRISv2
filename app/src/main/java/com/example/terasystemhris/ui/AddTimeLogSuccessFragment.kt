@@ -28,7 +28,6 @@ class AddTimeLogSuccessFragment : Fragment() {
             currentTime = bundle.getString("currentTime")!!
             myDetails = bundle.getParcelable("keyAccountDetails")!!
         }
-        activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_addtimelogsuccess, container, false)
         myInterface?.setTitle(getString(R.string.addtimelogsuccess_title))
         myInterface?.setAddButtonTitle(null)

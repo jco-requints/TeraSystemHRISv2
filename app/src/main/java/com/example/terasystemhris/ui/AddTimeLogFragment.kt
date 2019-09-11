@@ -30,7 +30,6 @@ class AddTimeLogFragment : Fragment(), NetworkRequestInterface {
         {
             myDetails = bundle.getParcelable("keyAccountDetails")!!
         }
-        activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_addtimelog, container, false)
         myInterface?.setTitle(getString(R.string.addtimelog_title))
         myInterface?.setAddButtonTitle(getString(R.string.done_title))
@@ -64,8 +63,6 @@ class AddTimeLogFragment : Fragment(), NetworkRequestInterface {
             val fragmentManager = myInterface?.getSupportFragmentManager()
             fragmentManager?.popBackStackImmediate()
         }
-
-
         return view
     }
 

@@ -34,7 +34,6 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
         {
             myDetails = bundle.getParcelable("keyAccountDetails")!!
         }
-        activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_logs, container, false)
         val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingGetTimeLogs.htm").toString()
         myInterface?.setTitle(getString(R.string.logs_title))

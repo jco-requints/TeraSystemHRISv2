@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.terasystemhris.*
 import kotlinx.android.synthetic.main.fragment_leaves.view.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import org.json.JSONObject
 import java.net.URL
 import java.text.ParseException
@@ -39,7 +38,6 @@ class LeavesFragment : Fragment(), NetworkRequestInterface {
         {
             myDetails = bundle.getParcelable("keyAccountDetails")!!
         }
-        activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_leaves, container, false)
         val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingGetLeaves.htm").toString()
         myInterface?.setTitle(getString(R.string.leaves_title))

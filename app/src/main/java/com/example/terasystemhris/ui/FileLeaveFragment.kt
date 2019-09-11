@@ -40,7 +40,6 @@ class FileLeaveFragment : Fragment(), NetworkRequestInterface {
         {
             myDetails = bundle.getParcelable("keyAccountDetails")!!
         }
-        activity?.title = ""
         val view = inflater.inflate(R.layout.fragment_fileleave, container, false)
         myInterface?.setTitle(getString(R.string.fileleave_title))
         myInterface?.setAddButtonTitle(getString(R.string.done_title))
