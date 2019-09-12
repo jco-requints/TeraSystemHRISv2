@@ -17,6 +17,11 @@ import com.example.bottomnavigation.helper.getTag
 import com.example.bottomnavigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_main.*
+import android.widget.Toast
+import android.content.DialogInterface
+import android.content.Intent
+import androidx.appcompat.app.AlertDialog
+
 
 class FragmentActivity : AppCompatActivity(), AppBarController {
 
@@ -94,7 +99,7 @@ class FragmentActivity : AppCompatActivity(), AppBarController {
         val fragment = supportFragmentManager.findFragmentById(container.id)
 
         when (fragment) {
-            is LogsFragment -> finish()
+            is LogsFragment -> alertDialog()
 
             is AddTimeLogFragment,
             is AddTimeLogSuccessFragment,
@@ -112,6 +117,25 @@ class FragmentActivity : AppCompatActivity(), AppBarController {
                 fragmentTransaction?.commit()
             }
         }
+    }
+
+    private fun alertDialog() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("Are you sure you want to logout?")
+//        dialog.setMessage("Please Select any option")
+        dialog.setPositiveButton("YES",
+            DialogInterface.OnClickListener { dialog, which ->
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    this.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(intent)
+            })
+        dialog.setNegativeButton("cancel",
+            DialogInterface.OnClickListener { dialog, which ->
+                // Enter code here
+            })
+        val alertDialog = dialog.create()
+        alertDialog.show()
     }
 
     override fun setTitle(title: String) {

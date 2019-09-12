@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/toggleborder"
+    android:background="@drawable/leaves_border"
     android:padding="8dp">
 
     <TextView
@@ -17,13 +17,13 @@
         android:layout_marginRight="8dp"
         android:adjustViewBounds="true"
         android:textAlignment="center"
-        app:layout_constraintBaseline_toBaselineOf="@+id/numberOfDays"
-        app:layout_constraintEnd_toStartOf="@+id/numberOfDays"
+        app:layout_constraintBaseline_toBaselineOf="@+id/itemTimeIn"
+        app:layout_constraintEnd_toStartOf="@+id/itemTimeIn"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="August 2" />
 
     <TextView
-        android:id="@+id/numberOfDays"
+        android:id="@+id/itemTimeIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top|start"
@@ -52,9 +52,9 @@
         android:maxLines="5"
         android:textAlignment="center"
         android:textAllCaps="true"
-        app:layout_constraintBaseline_toBaselineOf="@+id/numberOfDays"
+        app:layout_constraintBaseline_toBaselineOf="@+id/itemTimeIn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/numberOfDays"
+        app:layout_constraintStart_toEndOf="@+id/itemTimeIn"
         tools:text="5:50 PM" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

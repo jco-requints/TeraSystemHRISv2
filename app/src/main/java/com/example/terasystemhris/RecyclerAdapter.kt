@@ -1,5 +1,6 @@
 package com.example.terasystemhris
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -45,8 +46,26 @@ class RecyclerAdapter(private val logs: ArrayList<Logs>) : RecyclerView.Adapter<
         fun bindLogs(logs: Logs) {
             this.logs = logs
             view.leaveDuration.text = logs.date
-            view.numberOfDays.text = logs.timeIn
-            view.itemTimeOut.text = logs.timeOut
+            if(logs.timeIn.isNullOrEmpty() ||logs.timeIn == "null")
+            {
+                view.itemTimeIn.text = "N/A"
+                view.itemTimeIn.setTextColor(Color.parseColor("#FF0000"))
+            }
+            else
+            {
+                view.itemTimeIn.text = logs.timeIn
+                view.itemTimeIn.setTextColor(Color.parseColor("#FF000000"))
+            }
+            if(logs.timeOut.isNullOrEmpty() || logs.timeOut == "null")
+            {
+                view.itemTimeOut.text = "N/A"
+                view.itemTimeOut.setTextColor(Color.parseColor("#FF0000"))
+            }
+            else
+            {
+                view.itemTimeOut.text = logs.timeOut
+                view.itemTimeOut.setTextColor(Color.parseColor("#FF000000"))
+            }
         }
 
         fun fragmentJump(logs: Logs){

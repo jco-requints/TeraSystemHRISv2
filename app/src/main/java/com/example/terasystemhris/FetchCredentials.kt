@@ -8,13 +8,15 @@ import android.util.Log
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
+import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
 
 @SuppressLint("StaticFieldLeak")
-class FetchCredentials(private var networkRequestInterface: NetworkRequestInterface) : AsyncTask<String, Int, String?>() {
+class FetchCredentials( private var networkRequestInterface: NetworkRequestInterface) : AsyncTask<String, Int, String?>() {
 
+    //val requestParam: HashMap<String, String>
     override fun onPreExecute() {
         super.onPreExecute()
         networkRequestInterface.beforeNetworkCall()

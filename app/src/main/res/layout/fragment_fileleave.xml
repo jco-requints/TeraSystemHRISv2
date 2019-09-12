@@ -121,10 +121,8 @@
                         android:id="@+id/spinnerHolder"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginRight="16dp"
                         android:layout_weight="1"
-                        android:background="@drawable/spinner_border"
+                        android:background="@null"
                         android:orientation="horizontal"
                         tools:layout_editor_absoluteX="259dp"
                         tools:layout_editor_absoluteY="115dp">
@@ -132,7 +130,9 @@
                         <Spinner
                             android:id="@+id/spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textEnd"
+                            android:layout_gravity="end" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -244,7 +244,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/background"
+                android:background="@null"
                 android:orientation="horizontal">
 
                 <TextView

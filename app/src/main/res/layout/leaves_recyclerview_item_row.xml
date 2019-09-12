@@ -4,55 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/my_border"
+    android:background="@drawable/leaves_border"
     android:padding="8dp">
 
-    <TextView
-        android:id="@+id/leaveDuration"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
-        android:layout_marginBottom="4dp"
-        android:adjustViewBounds="true"
-        android:textAlignment="textStart"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/leaveType"
-        app:layout_constraintEnd_toStartOf="@+id/numberOfDays"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="September 11 to September 12" />
-
-    <TextView
-        android:id="@+id/numberOfDays"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="58dp"
-        android:layout_marginRight="58dp"
-        android:layout_weight="1"
-        android:textAlignment="textEnd"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/leaveDuration"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/leaveDuration"
-        tools:text="5" />
-
-    <TextView
-        android:id="@+id/leaveType"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leaveDuration"
-        tools:text="Vacation Leave" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/leaveDuration"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:adjustViewBounds="true"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/leaveType"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="September 11 to September 12" />
+
+                <TextView
+                    android:id="@+id/leaveType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/leaveDuration"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:text="Vacation Leave" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/numberOfDays"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical|center"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            tools:text="5" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

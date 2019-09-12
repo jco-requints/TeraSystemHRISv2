@@ -7,12 +7,12 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomnavigation.ui.AddTimeLogFragment
 import kotlinx.android.synthetic.main.fragment_logs.view.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import org.json.JSONObject
 import java.net.URL
 import java.text.ParseException
@@ -35,7 +35,7 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
             myDetails = bundle.getParcelable("keyAccountDetails")!!
         }
         val view = inflater.inflate(R.layout.fragment_logs, container, false)
-        val mURL = URL("http://222.222.222.71:9080/MobileAppTraining/AppTrainingGetTimeLogs.htm").toString()
+        val mURL = URL(URLs.URL_GET_TIME_LOGS).toString()
         myInterface?.setTitle(getString(R.string.logs_title))
         myInterface?.setAddButtonTitle("+")
         myInterface?.setCancelButtonTitle(null)
@@ -159,8 +159,14 @@ class LogsFragment : Fragment(), NetworkRequestInterface {
 
     companion object {
         val TAG: String = LogsFragment::class.java.simpleName
+        const val KEY_ACCOUNT_DETAILS = "keyAccountDetails"
+
         fun newInstance(bundle: Bundle) = LogsFragment().apply {
             this.arguments = bundle
+        }
+
+        fun newInstance(accountDetails: AccountDetails) = LogsFragment().apply {
+            arguments = bundleOf(KEY_ACCOUNT_DETAILS to accountDetails)
         }
     }
 
